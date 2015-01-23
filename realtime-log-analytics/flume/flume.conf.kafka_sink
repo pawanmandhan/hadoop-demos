@@ -9,22 +9,15 @@ sandbox.sources.eventlog.restart = true
 sandbox.sources.eventlog.batchSize = 1000
 #sandbox.sources.eventlog.type = seq
 
-# HDFS sinks
-sandbox.sinks.sink_to_hdfs.type = hdfs
-sandbox.sinks.sink_to_hdfs.hdfs.fileType = DataStream
-sandbox.sinks.sink_to_hdfs.hdfs.path = /flume/events
-sandbox.sinks.sink_to_hdfs.hdfs.filePrefix = eventlog
-sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix = .log
-sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 1000
-
 #Kafka Sink
 sandbox.sinks.kafka.type = org.apache.flume.sink.kafka.KafkaSink
-sandbox.sinks.kafka.channel = file_channel
-sandbox.sinks.kafka.zk.connect = sandbox.hortonworks.com:2181
-sandbox.sinks.kafka.topic = all
-sandbox.sinks.kafka.batchsize = 200
-sandbox.sinks.kafka.producer.type = async
-sandbox.sinks.kafka.serializer.class = kafka.serializer.StringEncoder
+#sandbox.sinks.kafka.zk.connect = sandbox.hortonworks.com:2181
+#sandbox.sinks.kafka.topic = all
+sandbox.sinks.kafka.batchsize = 5
+sandbox.sinks.kafka.brokerList = sandbox.hortonworks.com:6667
+#sandbox.sinks.kafka.producer.type = async
+sandbox.sinks.kafka.topic = sinkforflume
+#sandbox.sinks.kafka.serializer.class = kafka.serializer.StringEncoder
 
 
 # Use a channel which buffers events in memory

@@ -1,0 +1,110 @@
+
+
+- Log File - 
+
+app1_server1_log.log
+
+timestamp
+source_ip
+target_ip
+session_id
+request_url
+event_code
+response_status
+response_code
+response_msg
+
+
+- HDFS Directory structure  - 
+
+/app/log-analyzer/data/app1/server1/YYYYMMDD.log
+
+
+- Hive Table - 
+
+source_ip
+target_ip
+date
+day_of_week
+session_id
+request_url
+response_status
+response_code
+response_msg
+
+
+
+--HBase-- 
+
+traffic_by_min
+	server
+	app
+	total
+	error
+traffic_by_hour
+traffic_by_date
+
+
+traffic_by_error_codes
+	server
+	app
+	date
+	hour
+	min
+	error_code
+	count
+
+traffic_by_ip_address ( top 10 only )
+	server
+	app
+	date
+	hour
+	min
+	ipaddress
+	count
+
+
+enrich  ( pulled by encicher every min ) 
+	server
+	cpu
+	memory
+	process_count
+
+
+
+
+- Alerts -
+
+ Traffic By Day of the week & Month by Hour of the Day
+ Unique IPs by Hour of the day and day of the week
+ Total Requests from an IP by Hour by Day of the week
+ Error / Success Ratio by Hour
+ Error count by error type and day of the week
+ Special Events – Tax days, installs, press release..
+ Got an invalid request..
+
+
+
+
+
+
+This is how you put your object in the configuration map on topology submission:
+
+Config conf = new Config();
+MyObject myPreciousObject = new MyObject("precious");
+conf.put("my.object",myPreciousObject);
+
+StormSubmitter.submitTopology(args[0], conf, builder.createTopology());
+This is how you retrieve it in the prepare() method of a bolt or spout:
+
+prepare(Map stormConf,TopologyContext context) {
+
+   MyObject myPreciousObject = (MyObject) stormConf.get("my.object");
+
+} 
+
+------
+
+
+http://docs.hortonworks.com/HDPDocuments/HDP1/HDP-1.3.7/bk_user-guide/content/user-guide-hbase-import-1.html
+

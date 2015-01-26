@@ -1,3 +1,5 @@
+
+$(document).ready(function() {
 // With JQuery
 $('#ex1').slider({
 	formatter: function(value) {
@@ -11,3 +13,5 @@ var slider = new Slider('#ex1', {
 		return 'Current value: ' + value;
 	}
 });
+
+}

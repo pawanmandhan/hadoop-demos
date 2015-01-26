@@ -14,4 +14,4 @@ var slider = new Slider('#ex1', {
 	}
 });
 
-}
+});

@@ -13,7 +13,11 @@ sandbox.sinks.sink_to_hdfs.hdfs.fileType = DataStream
 sandbox.sinks.sink_to_hdfs.hdfs.path = /flume/events
 sandbox.sinks.sink_to_hdfs.hdfs.filePrefix = eventlog
 sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix = .log
-sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 1000
+sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 50000
+sandbox.sinks.sink_to_hdfs.hdfs.rollCount = 0
+sandbox.sinks.sink_to_hdfs.hdfs.rollInterval = 0
+sandbox.sinks.sink_to_hdfs.hdfs.rollSize = 10000000
+sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 10000
 
 # Use a channel which buffers events in memory
 sandbox.channels.file_channel.type = file

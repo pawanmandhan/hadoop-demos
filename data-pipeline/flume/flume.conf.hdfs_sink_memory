@@ -6,6 +6,7 @@ sandbox.sinks = sink_to_hdfs
 sandbox.sources.eventlog.type = spooldir
 sandbox.sources.eventlog.spoolDir = /root/demo-data
 sandbox.sources.eventlog.fileHeader = true
+sandbox.sources.eventlog.deletePolicy = immediate
 
 # HDFS sinks
 sandbox.sinks.sink_to_hdfs.type = hdfs
@@ -16,11 +17,11 @@ sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix =
 sandbox.sinks.sink_to_hdfs.hdfs.rollCount = 0
 sandbox.sinks.sink_to_hdfs.hdfs.rollInterval = 0
 sandbox.sinks.sink_to_hdfs.hdfs.rollSize = 0
-sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 0
+sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 1000
 
 # Use a channel which buffers events in memory
 sandbox.channels.memory_channel.type = memory
-sandbox.channels.memory_channel.capacity = 1000
+sandbox.channels.memory_channel.capacity = 10000
 #sandbox.channels.memory_channel.checkpointDir = /var/flume/checkpoint
 #sandbox.channels.memory_channel.dataDirs = /var/flume/data
 

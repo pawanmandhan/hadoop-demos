@@ -6,16 +6,20 @@ sandbox.sinks = sink_to_hdfs
 sandbox.sources.eventlog.type = spooldir
 sandbox.sources.eventlog.spoolDir = /root/demo-data
 sandbox.sources.eventlog.fileHeader = true
+sandbox.sources.eventlog.trackerDir = tracker/
+
 
 # HDFS sinks
 sandbox.sinks.sink_to_hdfs.type = hdfs
 sandbox.sinks.sink_to_hdfs.hdfs.fileType = DataStream
 sandbox.sinks.sink_to_hdfs.hdfs.path = /flume/events
 sandbox.sinks.sink_to_hdfs.hdfs.filePrefix = %{file}
-sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix = 
+sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix = done
+sandbox.sinks.sink_to_hdfs.hdfs.inUseSuffix = .intransit
 sandbox.sinks.sink_to_hdfs.hdfs.rollCount = 0
 sandbox.sinks.sink_to_hdfs.hdfs.rollInterval = 0
 sandbox.sinks.sink_to_hdfs.hdfs.rollSize = 0
+sandbox.sinks.sink_to_hdfs.hdfs.idleTimeout = 3
 
 # Use a channel which buffers events in memory
 sandbox.channels.file_channel.type = file

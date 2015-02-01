@@ -1,10 +1,13 @@
+package com.hortonworks.oozie.el.ext;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 /**
  * Created by bsaini on 2/1/15.
  */
-public class MyTimestamp {
+public class CustomTimestamp {
 
     public static String customTimestamp(String format){
 

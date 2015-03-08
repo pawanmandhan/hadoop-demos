@@ -1,7 +1,6 @@
 import org.apache.hadoop.io.Text;
 import org.json.*;
 import org.apache.hadoop.hive.ql.exec.UDF;
-import org.apache.hadoop.io.Text;
 
 public class XML2JSONConvertor extends UDF {
 

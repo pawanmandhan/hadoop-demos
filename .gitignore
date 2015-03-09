@@ -1,2 +1,6 @@
 .idea
 realtime-log-analytics/ambari-view/target
+.DS_Store
+falcon/.DS_Store
+java/src/main/java/com/hortonworks/oozie/el/ext/.DS_Store
+udf/.DS_Store

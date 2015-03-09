@@ -22,3 +22,10 @@ Input data in this directory is taken from - http://wiki.cdisc.org/display/PUB/C
 * TS = Trial Summary
 * TV = Trial Visits
 * VS = Vital Signs
+
+
+
+
+### Note: 
+
+Unzip the zipped files. They are zipped due to file size limit imposed by github.com

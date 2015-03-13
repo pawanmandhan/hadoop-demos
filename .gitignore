@@ -5,3 +5,4 @@ falcon/.DS_Store
 java/src/main/java/com/hortonworks/oozie/el/ext/.DS_Store
 udf/.DS_Store
 realtime-log-analytics/log-generator/event.log
+data-pipeline/udf/JSONObjector.class

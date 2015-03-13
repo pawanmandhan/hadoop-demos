@@ -1,3 +1,7 @@
+LOAD DATA INPATH '/user/hue/SV-sample.xml' INTO TABLE `test1.raw_xml`
+LOAD DATA INPATH '/user/ambari-qa/data_pipeline_demo/hivedb/raw_json/' INTO TABLE `test2.sv_json_data`;
+
+
 set hive.execution.engine=tez;
 --set hive.exec.dynamic.partition.mode=nonstrict;
 --set hive.exec.dynamic.partition=true;
@@ -17,7 +21,7 @@ set hive.execution.engine=tez;
 --set mapreduce.input.fileinputformat.split.minsize.per.node=240000000;
 --set mapreduce.input.fileinputformat.split.minsize.per.rack=240000000;
 
-set hive.tez.container.size=1024
+set hive.tez.container.size=1024;
 
 set hive.vectorized.execution.enabled = true;
 set hive.vectorized.execution.reduce.enabled=true;
@@ -25,8 +29,22 @@ set hive.vectorized.execution.reduce.enabled=true;
 set hive.cbo.enable=true;
 --set hive.compute.query.using.stats = true;
 
-select convertX2J(row) from raw_xml; 
+--********** QUERY NUMBER 1 ************---
 
-select convertJArr2Obj(convertX2J(row)) from raw_xml; 
+insert into table raw_json
+select convertJArr2Obj(convertX2J(row)) from raw_xml;
+
+--********** QUERY NUMBER 2 ************---
+
+LOAD DATA INPATH '/user/ambari-qa/data_pipeline_demo/hivedb/raw_json/' INTO TABLE `test2.sv_json_data`;
 
 
+--********** QUERY NUMBER 3 ************---
+
+set hive.execution.engine=tez;
+
+insert into table sv_aggregate
+select studyid,visit,year(svstdtc),month(svstdtc),count(*) from sv_json_data
+group by 
+studyid,visit,year(svstdtc),month(svstdtc)
+;

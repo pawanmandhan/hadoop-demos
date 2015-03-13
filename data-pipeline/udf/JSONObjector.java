@@ -10,20 +10,28 @@ public class JSONObjector extends UDF {
     public Text evaluate(final Text s) {
         try {
 			JSONObject jsonInArrFormat = new JSONObject(s.toString());
-			//JSONObject jsonInArrFormat = new JSONObject(TEST_STRING);
+
 			JSONObject jsonRootObject = jsonInArrFormat.getJSONObject("ItemGroupData");
 			JSONArray ja = jsonRootObject.getJSONArray("ItemData");
-			
+			//System.out.println(ja.toString());
+						
 			JSONObject tmpArrayJSONElement = null;
-			HashMap objectMap = new HashMap();
+			LinkedHashMap objectMap = new LinkedHashMap();
+			String name=null;
+			Object val=null;
+			
 			for(int index=0;index<ja.length();index++){
 				tmpArrayJSONElement = ja.getJSONObject(index);
-				objectMap.put(tmpArrayJSONElement.getString("ItemOID"),tmpArrayJSONElement.get("Value"));
+				name = tmpArrayJSONElement.getString("ItemOID");
+				name = name.substring(name.lastIndexOf(".")+1,name.length()).toLowerCase();
+				System.out.println("For index = "+index+" got name="+name);
+				val = tmpArrayJSONElement.get("Value");
+				objectMap.put(name,val);
 			}
 
-			JSONObject newJSONObj = new JSONObject(objectMap);
-			newJSONObj.put("ItemGroupOID",jsonRootObject.getString("ItemGroupOID"));
-			newJSONObj.put("data:ItemGroupDataSeq",jsonRootObject.get("data:ItemGroupDataSeq"));
+			JSONObject newJSONObj = new JSONObject(objectMap);			
+			newJSONObj.put("groupOID",jsonRootObject.getString("ItemGroupOID"));
+			newJSONObj.put("groupSeq",jsonRootObject.get("data:ItemGroupDataSeq"));
 
 			return new Text(newJSONObj.toString());
 			

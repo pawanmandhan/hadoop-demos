@@ -1,6 +1,6 @@
 #Creating custom UDF for converting XML into JSON.
 
-The java code for converting XML into JSON is included in this code repo. Follow the steps below to add this custom repo to Hive Server on your cluster
+The java code for converting XML into JSON is included in this code repo. Follow the steps below to add this custom UDF to Hive Server on your cluster
 
 * Get the code from github
 ```

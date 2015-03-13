@@ -1,8 +1,8 @@
-#Flow 1 
+# Flow
 
-##Introduction
+## Introduction
 
-The goal of this pipeline flow is to ingest data files, that are copied to the landing zone on a gateway server, and process them at a regular interval. When the workflow begins, the files are ingested, stored, transformed and the transformed data is sqooped out of cluster into a MySQL database. 
+The goal of this data pipeline flow is to ingest data files, that are copied to the landing zone on a gateway server, and then process them at a regular interval. When the workflow begins, the files are ingested, stored, transformed and the transformed data is sqooped out of cluster into a MySQL database. 
 
 In this flow, there are following processes and steps 
 
@@ -19,47 +19,87 @@ In this flow, there are following processes and steps
 		* Also insert the data from process (temp table) into the history table.
 		* export the data out of Hive to a Mysql table
 		
+## Architecture
+
+![Data Pipeline Flow 1 - Architecture](https://raw.githubusercontent.com/sainib/hadoop-demos/master/data-pipeline/flows/flow-1/architecture.png)
 		
-###Pipeline 
+### Pipeline 
 
-Input -> RAW -> temp table -> 		
+Input -> RAW -> temp table -> export 				
 
-##Setting up the project		
+## Setting up the project		
 
-###Getting Project components
+### Getting Project components
 
 * Project Components used are (relative to this project within the github code) 
-	* ../../udf
-	* ../../falcon/flow-1
+	* ../../udf/
+	* ../../hql/flow1/*
+	* ../../falcon/flow1
 	* ../../input_data
-	* ../../flume/flume.conf.flow1
+	* ../../flume/flow1/flume.conf
 	
 
-###Steps to setup up Project components
+### Steps to setup up Project components
+
+* Ambari Setting
+```
+// Save and restart all components after changing configs
+
+// Hive, set
+webhcat.proxyuser.oozie.groups = *
+webhcat.proxyuser.oozie.hosts = *
+
+// hdfs - core site
+hadoop.proxyuser.oozie.groups = *
+hadoop.proxyuser.oozie.hosts = *
+
+hadoop.proxyuser.falcon.groups = *
+hadoop.proxyuser.falcon.hosts = *
+
+// Oozie
+oozie.service.AuthorizationService.security.enabled = false
+
+```
 
 * Setup UDF. Follow the README.MD within the udf directory
 
+* Setup the Hive Database using ../../hql/flow1/DDL/
+```
+Note: The user who will be submitting Falcon jobs needs to have write permissions to these tables. So, run this command, to create Hive tables, either with the user who will be submitting Falcon jobs or another user within the same group, ensuring that Hive tables have write permission for the group.
+
+Recommend testing with ambari-qa. You would first run su - ambari-qa
+
+hive -e ../../hql/flow1/DDL/create-tables.hql
+```
+
+* Add JSON Serde Jar to Hive, using instructions in  ../../hql/flow1/DDL/
+
 * Setup Flume
 
-* Setup HDFS Directories
-
-```
-Caution : 
-
-* Selecting the right user ids
-
-* Ensuring file / directory permissions
-
-```
-
-* Setup Hive
+* Setup HDFS Directories (hql, workflow, jars, scripts)
 
 * Setup Falcon
 
 * Setup Sqoop
 
+```
+Caution : 
 
-###Tracking the execution of Falcon Jobs
+* Select the right user ids - avoid using master users for the services for setting up your process. like - hdfs, hue, falcon, etc. The correct approach is to establish a process id (unix id on the cluster that does not belong to a person but is used for running jobs) and assign proper permissions to that user id so that you can interact with different services using those service ids. Also, typically this process id shares group with the IT / Dev/ Support group so that work done by process is visible to the appropriate parties. 
+
+* Ensure file / directory permissions - See the note at the end of the document but in short, make sure the user used for running the process has all the required rights on the directories involved to finish the job. 
+
+```
+
+### Submitting/Scheduling the job
+
+
+
+### Supplying the input data 
+
+
+
+### Tracking the execution of Falcon Jobs
 
 * Via Falcon UI 
 

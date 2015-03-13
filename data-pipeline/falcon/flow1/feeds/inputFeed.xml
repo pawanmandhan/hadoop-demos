@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ A feed representing Hourly customer email data retained for 90 days
+ -->
+<feed description="Verizon Router Data" name="verizonRouterData"
+    xmlns="uri:falcon:feed:0.1">
+    
+    <tags>externalSystem=RouterData,classification=sensor</tags>
+    <groups>routers</groups>
+    <frequency>minutes(5)</frequency>
+    <late-arrival cut-off="hours(4)"/>
+    <clusters>
+        <cluster name="primaryCluster" type="source">
+            <validity start="2015-02-07T00:00Z" end="2015-02-08T00:00Z"/>
+            <retention limit="days(1)" action="delete"/>
+        </cluster>
+    </clusters>
+    
+    <locations>
+        <location type="data" path="/apps/verizon/poc1/data"/>
+    </locations>
+    
+    <ACL owner="hdfs" group="hdfs" permission="0755"/>
+    <schema location="/none" provider="none"/>
+</feed>

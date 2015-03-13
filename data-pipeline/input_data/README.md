@@ -1,7 +1,6 @@
-
 #Input Data 
 
-Input data in this directory is taken from - http://wiki.cdisc.org/display/PUB/CDISC+Dataset-XML+Resources
+Input data in downloaded directory is Downloaded from - http://wiki.cdisc.org/display/PUB/CDISC+Dataset-XML+Resources
 
 * AE = Adverse Events
 * CM = Concomitant Medications
@@ -23,7 +22,12 @@ Input data in this directory is taken from - http://wiki.cdisc.org/display/PUB/C
 * TV = Trial Visits
 * VS = Vital Signs
 
+```
+IMPORTANT : For the purpose of this demo, we will use a file with sample data from SV file
 
+SV-sample.xml
+
+```
 
 
 ### Note: 

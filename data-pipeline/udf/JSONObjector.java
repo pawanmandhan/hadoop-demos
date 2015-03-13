@@ -33,7 +33,7 @@ public class JSONObjector extends UDF {
 			newJSONObj.put("groupOID",jsonRootObject.getString("ItemGroupOID"));
 			newJSONObj.put("groupSeq",jsonRootObject.get("data:ItemGroupDataSeq"));
 
-			return new Text(newJSONObj.toString());
+      		return new Text(newJSONObj.toString());
 			
         } catch (Exception je) {
             return new Text("Error while converting JSON Array to JSON Object");

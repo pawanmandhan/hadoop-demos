@@ -18,6 +18,11 @@ In this flow, there are following processes and steps
 		* Apply aggregation / transformation process to the JSON table 
 		* Also insert the data from process (temp table) into the history table.
 		* export the data out of Hive to a Mysql table
+		
+		
+###Pipeline 
+
+Input -> RAW -> temp table -> 		
 
 ##Setting up the project		
 

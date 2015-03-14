@@ -4,18 +4,21 @@
  -->
 <process name="verizonPOC1ProcessMinHr" xmlns="uri:falcon:process:0.1">
     
-    <tags>pipeline=verizonPOC1Pipeline,owner=verizon,externalSystem=RouterData</tags>
+    <tags>pipeline=eventsDataPipeline,owner=demo,externalSystem=clinicalResearch</tags>
     
     <clusters>
         <cluster name="primaryCluster">
-			  <validity start="2015-02-09T02:53Z" end="2015-02-10T02:53Z" />
+			  <validity start="2015-03-14T00:00Z" end="2016-02-08T22:00Z"/>
         </cluster>
     </clusters>
     
     <parallel>1</parallel>
     <order>FIFO</order>
     <frequency>minutes(5)</frequency>
-    	
+
+	<inputs>
+        <input name="eventData" feed="demoEventData" start="today(0,0)" end="today(1,0)" partition="*/US"/>
+    </inputs>    	
 
     <properties>
 		<property name="execution_id" value="${coord:formatTime(coord:nominalTime(), 'yyyyMMdd_HH')}" />
@@ -31,37 +34,32 @@
 		<property name="report_date_hour_value" value="${coord:formatTime(coord:nominalTime(), 'HH')}" />		
 		<!-- TESTING CHANGE END  -->
 
-		<property name="workflow_root_dir" value="/apps/verizon/poc1" />
+		<property name="workflow_root_dir" value="/user/ambari-qa/data_pipeline_demo" />
 	
-		<property name="hive_db" value="verizon_poc" />
-		<property name="base_part_table_name" value="eclipse_raw_idn_vmn_perform_part" />
-		<property name="base_raw_table_name" value="eclipse_raw_idn_vmn_perform_raw" />
-		<property name="minute_table_name" value="eclipse_traffic_data_min" />
-		<property name="hourly_table_name" value="eclipse_traffic_data_hr" />
-		<property name="minute_export_table_name" value="eclipse_traffic_data_min_export" />
-		<property name="hourly_export_table_name" value="eclipse_traffic_data_hr_export" />
-		<property name="base_archive_table_name" value="eclipse_raw_idn_vmn_perform_raw_archive" />
-		<property name="minute_archive_table_name" value="eclipse_traffic_data_min_archive" />
-		<property name="hourly_archive_table_name" value="eclipse_traffic_data_hr_archive" />
+		<property name="hive_db" value="hivedb" />
+
 		
-		<property name="audit_table_name" value="verizon_poc1_job_audit_info" />
+		<property name="xml_raw_table" value="raw_xml" />
+		<property name="json_raw_table" value="raw_json" />
+		<property name="json_events_table" value="sv_json_data" />
+		<property name="export_table" value="sv_aggregate" />
+
+		<property name="xml_archive_table" value="xml_data_archive" />
+		<property name="json_events_master_table" value="sv_json_data_master" />		
+
+		<property name="audit_table_name" value="demo_job_audit_info" />
 		
-		<property name="daily_archive_table_name" value="eclipse_traffic_data_dly_archive" />
-		<property name="daily_export_table_name" value="eclipse_traffic_data_dly_export" />
-		
-		<property name="EXPORT_JDBC_URL" value="jdbc:mysql://localhost:3306/verizon" />
-		<property name="EXPORT_USER_ID" value="bedrock" />
-		<property name="EXPORT_USER_PASSWORD" value="bedrock" />
-		<property name="EXPORT_DATA_SOURCE_DIR" value="/user/verizon/vplan/" />
-		<property name="EXPORT_TARGET_MIN_EXPORT_TABLE" value="traffic_data_min_export" />
-		<property name="EXPORT_TARGET_HR_EXPORT_TABLE" value="traffic_data_hr_export" />
-		<property name="EXPORT_TARGET_DLY_EXPORT_TABLE" value="traffic_data_dly_export" />				
+		<property name="EXPORT_JDBC_URL" value="jdbc:mysql://localhost:3306/demomysql" />
+		<property name="EXPORT_USER_ID" value="demouser" />
+		<property name="EXPORT_USER_PASSWORD" value="demopwd" />
+		<property name="EXPORT_DATA_SOURCE_DIR" value="/user/ambari-qa/data_pipeline_demo/hivedb/sv_aggregate" />
+		<property name="TARGET_EXPORT_TABLE" value="sv_aggregate" />
 		<property name="EXPORT_DATA_DELIMITER" value="|" />
 														
     </properties>
  
-    <workflow name="verizonPOCMinHrWorkflow" version="2.0.0"
-    engine="oozie" path="/apps/verizon/poc1/falcon/wf/min_hr_workflow" />
+    <workflow name="dataPipelineDemoWorkflow" version="2.0.0"
+    engine="oozie" path="/user/ambari-qa/data_pipeline_demo/workflow" />
     
 	<retry policy="periodic" delay="minutes(15)" attempts="1" />
     

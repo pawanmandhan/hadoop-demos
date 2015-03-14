@@ -79,6 +79,30 @@ hive -e ../../hql/flow1/DDL/create-tables.hql
  - mkdir /root/data_pipeline_demo/input
 
 * Setup HDFS Directories (hql, workflow, jars, scripts)
+ - From the Hadoop Gateway / Edge / Client or Master server 
+ 
+ - su - hdfs 
+ #Data File Directories 
+ - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/input
+ - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/input
+ - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/input
+ 
+ - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/process
+ - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/process
+ - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/process
+
+ - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/backup
+ - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/backup
+ - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/backup
+#Falcon working directories 
+ - hdfs dfs -mkdir -p /apps/falcon/primaryCluster/staging
+ - hdfs dfs -chmod 777 /apps/falcon/primaryCluster/staging
+ - hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/staging
+
+ - hdfs dfs -mkdir -p /apps/falcon/primaryCluster/working
+ - hdfs dfs -chmod 755 /apps/falcon/primaryCluster/working
+ - hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/working
+
 
 * Setup Falcon
 

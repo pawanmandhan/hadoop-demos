@@ -16,7 +16,8 @@ Use these instructions to setup  the flume part of the project using spooling di
 ## Start the flume process 
 
 ```
-flume-ng agent -c /etc/flume/conf -f /etc/flume/conf/flume.conf -n sandbox
+cd /var/log/flume
+nohup flume-ng agent -c /etc/flume/conf -f /etc/flume/conf/flume.conf -n sandbox & 
 ```
 
 

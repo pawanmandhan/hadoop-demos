@@ -75,6 +75,8 @@ hive -e ../../hql/flow1/DDL/create-tables.hql
 * Add JSON Serde Jar to Hive, using instructions in  ../../hql/flow1/DDL/
 
 * Setup Flume
+ - On gateway server 
+ - mkdir /root/data_pipeline_demo/input
 
 * Setup HDFS Directories (hql, workflow, jars, scripts)
 

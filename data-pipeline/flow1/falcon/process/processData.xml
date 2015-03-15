@@ -59,7 +59,7 @@
     </properties>
  
     <workflow name="dataPipelineDemoWorkflow" version="2.0.0"
-    engine="oozie" path="/user/ambari-qa/data_pipeline_demo/workflow" />
+    engine="oozie" path="/user/ambari-qa/data_pipeline_demo/falcon/workflow" />
     
 	<retry policy="periodic" delay="minutes(15)" attempts="1" />
     

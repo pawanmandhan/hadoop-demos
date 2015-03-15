@@ -31,11 +31,8 @@
 
     <action name="myfirstpigjob">
         <pig>
-            <job-tracker>foo:8021</job-tracker>
-            <name-node>bar:8020</name-node>
-            <prepare>
-                <delete path="${jobOutput}"/>
-            </prepare>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
             <configuration>
                 <property>
                     <name>mapred.compress.map.output</name>
@@ -43,8 +40,8 @@
                 </property>
             </configuration>
             <script>${workflow_root_dir}/pig/mypigscript.pig</script>
-            <param>InputDir=${workflow_root_dir}/data/input/*.input</param>
-            <param>OutputDir=${workflow_root_dir}/data/process/${execution_id}</param>
+            <param>input=${workflow_root_dir}/data/input/*.input</param>
+            <param>output=${workflow_root_dir}/data/process/${execution_id}</param>
         </pig>
         <ok to="end"/>
         <error to="kill"/>

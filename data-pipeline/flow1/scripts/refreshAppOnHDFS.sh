@@ -2,5 +2,6 @@
 
 
 . ./removeAppFromHDFS.sh
-. ./changeValidityForEntities.sh
+. ./changeValidityForProcess.sh
+. ./changeValidityForFeed.sh
 . ./copyAppToHDFS.sh

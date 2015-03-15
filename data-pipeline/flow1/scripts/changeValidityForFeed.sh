@@ -19,7 +19,7 @@ vs=$(date -d "+5 minutes" +"%Y-%m-%dT%H:%MZ")
 
 head -n $vlb inputFeed.xml.ORIGINAL  >> inputFeed.xml.new
 echo "<validity start=\"${vs}\" end=\"${ve}\" />" >> inputFeed.xml.new
-tail -n $vla  inputFeed.xml.ORIGINAL >> inputFeed.xml.new
+tail -n +$vla  inputFeed.xml.ORIGINAL >> inputFeed.xml.new
 
 rm inputFeed.xml
 mv inputFeed.xml.new inputFeed.xml

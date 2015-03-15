@@ -63,6 +63,6 @@ echo "Create Falcon workflow directory - Done"
 
 else
 
-echo "Run as root or hdfs user"
+echo "Error : Unable to switch to user hdfs. Run as root"
 
 fi

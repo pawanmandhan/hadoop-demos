@@ -176,7 +176,7 @@ hdfs dfs -ls /user/ambari-qa/data_pipeline_demo/hql/
 
 ### Alternate way to setup this application 
 ```
-cd 
+cd to scripts directory
 bash resetEntityFiles.sh 
 bash setupAppOnHDFS.sh
 bash changeValidityForFeed.sh 

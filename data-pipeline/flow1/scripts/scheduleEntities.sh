@@ -1,5 +1,5 @@
 #!/bin/bash
 
-falcon entity -schedule -type feed -name demoEventData
-falcon entity -schedule -type process -name demoEventProcess
+su - ambari-qa -c "falcon entity -schedule -type feed -name demoEventData"
+su - ambari-qa -c "falcon entity -schedule -type process -name demoEventProcess"
 

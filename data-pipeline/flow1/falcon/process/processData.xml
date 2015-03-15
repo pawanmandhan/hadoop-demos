@@ -17,7 +17,7 @@
     <frequency>minutes(5)</frequency>
 
 	<inputs>
-        <input name="eventData" feed="demoEventData" start="today(0,0)" end="today(1,0)" partition="*/US"/>
+         <input name="eventData" feed="demoEventData" start="now(0,0)" end="now(0,0)" />
     </inputs>    	
 
     <properties>

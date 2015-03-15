@@ -21,22 +21,19 @@ In this flow, there are following processes and steps
 		
 ## Architecture
 
-![Data Pipeline Flow 1 - Architecture](https://raw.githubusercontent.com/sainib/hadoop-demos/master/data-pipeline/flows/flow-1/architecture.png)
-		
-### Pipeline 
-
-Input -> RAW -> temp table -> export 				
+![Data Pipeline Flow 1 - Architecture](https://raw.githubusercontent.com/sainib/hadoop-demos/master/data-pipeline/flow1/architecture.png)		
 
 ## Setting up the project		
 
 ### Getting Project components
 
 * Project Components used are (relative to this project within the github code) 
-	* ../../udf/
-	* ../../hql/flow1/*
-	* ../../falcon/flow1
-	* ../../input_data
-	* ../../flume/flow1/flume.conf
+	* ./pig
+	* ./udf
+	* ./hql
+	* ./falcon
+	* ./input_data
+	* ./flume/flume.conf
 	
 
 ### Steps to setup up Project components
@@ -63,16 +60,16 @@ oozie.service.AuthorizationService.security.enabled = false
 
 * Setup UDF. Follow the README.MD within the udf directory
 
-* Setup the Hive Database using ../../hql/flow1/DDL/
+* Setup the Hive Database using ../../hql/DDL/
 ```
 Note: The user who will be submitting Falcon jobs needs to have write permissions to these tables. So, run this command, to create Hive tables, either with the user who will be submitting Falcon jobs or another user within the same group, ensuring that Hive tables have write permission for the group.
 
 Recommend testing with ambari-qa. You would first run su - ambari-qa
 
-hive -e ../../hql/flow1/DDL/create-tables.hql
+hive -e ./hql/DDL/create-tables.hql
 ```
 
-* Add JSON Serde Jar to Hive, using instructions in  ../../hql/flow1/DDL/
+* Add JSON Serde Jar to Hive, using instructions in  ../../hql/DDL/
 
 * Setup Flume
  - On gateway server 
@@ -82,31 +79,60 @@ hive -e ../../hql/flow1/DDL/create-tables.hql
  - From the Hadoop Gateway / Edge / Client or Master server 
  
  - su - hdfs 
- #Data File Directories 
- - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/input
- - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/input
- - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/input
+
+ #hql File Directories 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/hql
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/hql
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/hql
+
+ #pig File Directories 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/pig
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/pig
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/pig
  
- - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/process
- - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/process
- - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/process
+ #conf File Directories 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/conf
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/conf
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/conf
+hdfs dfs -put /etc/hive/conf/hive-site.xml /user/ambari-qa/data_pipeline_demo/conf
+ 
+ #Data File Directories 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/input
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/input
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/input
+ 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/process
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/process
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/process
 
- - hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/backup
- - hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/backup
- - hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/backup
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/backup
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/data/backup
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/data/backup
 #Falcon working directories 
- - hdfs dfs -mkdir -p /apps/falcon/primaryCluster/staging
- - hdfs dfs -chmod 777 /apps/falcon/primaryCluster/staging
- - hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/staging
+hdfs dfs -mkdir -p /apps/falcon/primaryCluster/staging
+hdfs dfs -chmod 777 /apps/falcon/primaryCluster/staging
+hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/staging
 
- - hdfs dfs -mkdir -p /apps/falcon/primaryCluster/working
- - hdfs dfs -chmod 755 /apps/falcon/primaryCluster/working
- - hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/working
+hdfs dfs -mkdir -p /apps/falcon/primaryCluster/working
+hdfs dfs -chmod 755 /apps/falcon/primaryCluster/working
+hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/working
+
+ #falcon workflow File Directories 
+hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/falcon/workflow
+hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/falcon/workflow
+hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/falcon/workflow
 
 
 * Setup Falcon
 
 * Setup Sqoop
+```
+Upload RDBMS JDBC Connector jar to /usr/share/java/
+cd /usr/lib/hadoop/
+ln -s /usr/share/java/<jar-name>.jar
+cd /usr/hdp/2.2.0.0-2041/sqoop/lib
+ln -s /usr/share/java/<jar-name>.jar
+```
 
 ```
 Caution : 
@@ -123,6 +149,23 @@ Caution :
 
 ### Supplying the input data 
 
+
+### Refresh app code
+```
+hdfs dfs -rm -r /user/ambari-qa/data_pipeline_demo/hql/*
+hdfs dfs -rm -r /user/ambari-qa/data_pipeline_demo/pig/*
+hdfs dfs -rm -r /user/ambari-qa/data_pipeline_demo/conf/*
+hdfs dfs -rm -r /user/ambari-qa/data_pipeline_demo/falcon/workflow/*
+
+hdfs dfs -put ./hql/* /user/ambari-qa/data_pipeline_demo/hql/
+hdfs dfs -put ./pig/* /user/ambari-qa/data_pipeline_demo/pig/
+hdfs dfs -put /etc/hive/conf/hive-site.xml /user/ambari-qa/data_pipeline_demo/conf
+hdfs dfs -put ./falcon/workflow/* /user/ambari-qa/data_pipeline_demo/falcon/workflow/*
+
+
+hdfs dfs -ls /user/ambari-qa/data_pipeline_demo/hql/
+
+```
 
 
 ### Tracking the execution of Falcon Jobs
@@ -143,3 +186,5 @@ Top three things that could go wrong, when setting up a Falcon job are -
 * Permission - to write the output data to the specified output directory as the user who submitted the job. 
 
 Solution is simply to ensure all the required directories exist and that the user who submitted the Falcon entities have the right permissions on those directories. 
+
+

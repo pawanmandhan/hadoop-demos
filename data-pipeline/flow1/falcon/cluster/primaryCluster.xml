@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<cluster colo="location1" description="primaryVerizonHadoopCluster" name="primaryCluster" xmlns="uri:falcon:cluster:0.1">
+<cluster colo="location1" description="primaryDemoCluster" name="primaryCluster" xmlns="uri:falcon:cluster:0.1">
     <interfaces>
         <interface type="readonly" endpoint="hftp://sandbox.hortonworks.com:50070" version="2.2.0" />
         <interface type="write" endpoint="hdfs://sandbox.hortonworks.com:8020" version="2.2.0" />

@@ -2,7 +2,7 @@
 <!--
  Hourly process, ingests raw emails from all US west email servers
  -->
-<process name="verizonPOC1ProcessMinHr" xmlns="uri:falcon:process:0.1">
+<process name="demoEventProcess" xmlns="uri:falcon:process:0.1">
     
     <tags>pipeline=eventsDataPipeline,owner=demo,externalSystem=clinicalResearch</tags>
     

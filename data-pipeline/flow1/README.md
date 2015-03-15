@@ -144,7 +144,13 @@ Caution :
 ```
 
 ### Submitting/Scheduling the job
-
+```
+falcon entity -submit -type cluster -file /app/data-pipeline/flow1/falcon/cluster/primaryCluster.xml
+falcon entity -submit -type feed -file /app/data-pipeline/flow1/falcon/feeds/inputFeed.xml
+falcon entity -submit -type process -file /app/data-pipeline/flow1/falcon/process/processData.xml
+falcon entity -schedule -type feed -name demoEventData
+falcon entity -schedule -type process -name demoEventProcess
+```
 
 
 ### Supplying the input data 
@@ -167,6 +173,21 @@ hdfs dfs -ls /user/ambari-qa/data_pipeline_demo/hql/
 
 ```
 
+
+### Alternate way to setup this application 
+```
+
+bash resetEntityFiles.sh 
+bash setupAppOnHDFS.sh
+bash changeValidityForFeed.sh 
+bash changeValidityForProcess.sh 
+bash copyAppToHDFS.sh 
+
+bash submitEntities.sh
+bash scheduleEntities.sh
+
+ 
+ ```
 
 ### Tracking the execution of Falcon Jobs
 

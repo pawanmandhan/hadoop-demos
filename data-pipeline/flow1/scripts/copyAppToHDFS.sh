@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -vx 
 
 un=`whoami`
 project_root="/app/data-pipeline/flow1"

@@ -77,8 +77,8 @@ hive -e ./hql/DDL/create-tables.hql
 
 * Setup HDFS Directories (hql, workflow, jars, scripts)
  - From the Hadoop Gateway / Edge / Client or Master server 
- 
- - su - hdfs 
+ ```
+ su - hdfs 
 
  #hql File Directories 
 hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/hql
@@ -121,7 +121,7 @@ hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/working
 hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/falcon/workflow
 hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/falcon/workflow
 hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/falcon/workflow
-
+```
 
 * Setup Falcon
 

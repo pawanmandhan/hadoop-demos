@@ -39,7 +39,7 @@
               <argument>${eventData}/*.input</argument>            
               <argument>${workflow_root_dir}/data/process/${execution_id}</argument>                          
         </shell>
-        <ok to="capture_audit_info"/>
+        <ok to="kill"/>
         <error to="end"/>
     </action>
 

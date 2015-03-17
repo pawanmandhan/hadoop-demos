@@ -39,8 +39,9 @@
                     <value>true</value>
                 </property>
             </configuration>
-            <script>${workflow_root_dir}/pig/mypigscript.pig</script>
-            <param>input=${workflow_root_dir}/data/input/*.input</param>
+            <script>${workflow_root_dir}/pig/move_to_process.pig</script>
+            <!--<param>input=${workflow_root_dir}/data/input/*.input</param>-->
+            <param>input=${eventData}</param>
             <param>output=${workflow_root_dir}/data/process/${execution_id}</param>
         </pig>
         <ok to="end"/>

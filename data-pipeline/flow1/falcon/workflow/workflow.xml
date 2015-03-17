@@ -30,23 +30,19 @@
     </action>
 
     <action name="move_data_to_process">
-        <pig>
+        <shell xmlns="uri:oozie:shell-action:0.1">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
-            <configuration>
-                <property>
-                    <name>mapred.compress.map.output</name>
-                    <value>true</value>
-                </property>
-            </configuration>
-            <script>${workflow_root_dir}/pig/move_to_process.pig</script>
-            <!--<param>input=${workflow_root_dir}/data/input/*.input</param>-->
-            <param>input=${eventData}</param>
-            <param>output=${workflow_root_dir}/data/process/${execution_id}</param>
-        </pig>
-        <ok to="end"/>
-        <error to="kill"/>
+            <exec>hdfs</exec>
+              <argument>dfs</argument>
+              <argument>-mv</argument>
+              <argument>${eventData}/*.input</argument>            
+              <argument>${workflow_root_dir}/data/process/${execution_id}</argument>                          
+        </shell>
+        <ok to="capture_audit_info"/>
+        <error to="end"/>
     </action>
+
    
     <kill name="kill">
         <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>

@@ -15,7 +15,7 @@ vlb=$(( $vl - 1 ))
 vla=$(( $vl + 1 ))
 
 ve=$(date -d "+10 days" +"%Y-%m-%dT%H:%MZ")
-vs=$(date -d "+5 minutes" +"%Y-%m-%dT%H:%MZ")
+vs=$(date -d "+1 minutes" +"%Y-%m-%dT%H:%MZ")
 
 head -n $vlb inputFeed.xml.ORIGINAL  >> inputFeed.xml.new
 echo "<validity start=\"${vs}\" end=\"${ve}\" />" >> inputFeed.xml.new

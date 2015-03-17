@@ -29,7 +29,7 @@
         <error to="end"/>
     </action>
 
-    <action name="myfirstpigjob">
+    <action name="move_data_to_process">
         <pig>
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>

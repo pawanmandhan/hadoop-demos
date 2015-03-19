@@ -3,16 +3,16 @@ set hive.execution.engine=tez;
 
 --********** QUERY NUMBER 1 : Move data from XML table to JSON table ************---
 
-insert into table ${hivevar:json_raw_table}
+insert overwrite table ${hivevar:json_raw_table}
 select convertJArr2Obj(convertX2J(row)) from ${hivevar:xml_raw_table};
 
 --********** QUERY NUMBER 2 : Move JSON Data into next table that uses JSON Serde ************---
 
-LOAD DATA INPATH '${hivevar:workflow_root_dir}/hivedb/${hivevar:json_raw_table}/' INTO TABLE ${hivevar:json_events_table};
+LOAD DATA INPATH '${hivevar:workflow_root_dir}/hivedb/${hivevar:json_raw_table}/' OVERWRITE INTO TABLE ${hivevar:json_events_table};
 
 --********** QUERY NUMBER 3 : Aggregate the data for export ************---
 
-insert into table ${hivevar:export_table}
+insert overwrite table ${hivevar:export_table}
 select studyid,visit,year(svstdtc),month(svstdtc),count(*) from ${hivevar:json_events_table}
 group by 
 studyid,visit,year(svstdtc),month(svstdtc)

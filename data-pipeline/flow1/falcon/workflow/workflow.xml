@@ -131,7 +131,7 @@
             <arg>--input-null-non-string</arg>
             <arg>\\N</arg>
             <file>${workflow_root_dir}/jars/mysql-connector-java.jar</file>
-            <archive>${workflow_root_dir}/jars/mysql-connector-java.jarr</archive>			            
+            <archive>${workflow_root_dir}/jars/mysql-connector-java.jar</archive>			            
         </sqoop>
         <ok to="end"/>
         <error to="kill"/>

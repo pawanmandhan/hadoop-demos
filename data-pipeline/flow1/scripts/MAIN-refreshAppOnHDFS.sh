@@ -8,5 +8,5 @@
 . ./changeValidityForFeed.sh
 . ./copyAppToHDFS.sh
 
-. ./suspendEntites.sh
+. ./submitEntities.sh
 . ./scheduleEntities.sh

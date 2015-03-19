@@ -107,11 +107,11 @@
             <file>${workflow_root_dir}/jars/hive-hcatalog-core.jar</file>
             <archive>${workflow_root_dir}/jars/hive-hcatalog-core.jar</archive>			
         </hive>
-        <ok to="export_min_data"/>
+        <ok to="export_data"/>
         <error to="end"/>
     </action>    
 
-    <action name="export_min_data">
+    <action name="export_data">
         <sqoop xmlns="uri:oozie:sqoop-action:0.2">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
@@ -130,6 +130,8 @@
             <arg>${EXPORT_DATA_DELIMITER}</arg>
             <arg>--input-null-non-string</arg>
             <arg>\\N</arg>
+            <file>${workflow_root_dir}/jars/mysql-connector-java.jar</file>
+            <archive>${workflow_root_dir}/jars/mysql-connector-java.jarr</archive>			            
         </sqoop>
         <ok to="end"/>
         <error to="kill"/>

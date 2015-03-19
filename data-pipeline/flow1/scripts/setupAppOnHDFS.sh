@@ -28,6 +28,13 @@ su - hdfs -c "hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_dem
 su - hdfs -c "hdfs dfs -put /etc/hive/conf/hive-site.xml /user/ambari-qa/data_pipeline_demo/conf"
 echo "Create conf File  directory - Done"
  
+#jars File Directories 
+echo "Create jars File  directory - Start"
+su - hdfs -c "hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/jars"
+su - hdfs -c "hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/jars"
+su - hdfs -c "hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/jars"
+echo "Create jars File  directory - Done"
+  
 #Data File Directories 
 echo "Create Data File  directory - Start"
 su - hdfs -c "hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/data/input"

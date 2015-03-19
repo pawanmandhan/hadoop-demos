@@ -5,7 +5,7 @@ add jar /usr/hdp/2.2.0.0-2041/hive-hcatalog/share/hcatalog/hive-hcatalog-core.ja
 
 create database demodb;
 
-use database demodb;
+use demodb;
 
 
 --* BASE XML TABLE - FIRST TABLE TO GET LOADED - CLEANUP ALSO *-

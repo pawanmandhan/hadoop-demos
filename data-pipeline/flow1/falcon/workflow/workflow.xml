@@ -95,6 +95,7 @@
             <name-node>${nameNode}</name-node>
             <job-xml>${workflow_root_dir}/conf/hive-site.xml</job-xml>            
             <script>${workflow_root_dir}/hql/DML/aggregate.hql</script>
+            <archive>${workflow_root_dir}/jars/hive-hcatalog-core.jar</archive>
 			<param>execution_id=${execution_id}</param>
 			<param>workflow_root_dir=${workflow_root_dir}</param>
 			<param>hive_db=${hive_db}</param>

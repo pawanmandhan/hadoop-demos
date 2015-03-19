@@ -25,3 +25,4 @@ rm inputFeed.xml
 mv inputFeed.xml.new inputFeed.xml
 
 echo "Changed Feed File"
+cd -

@@ -24,3 +24,4 @@ tail -n +$vla  processData.xml.ORIGINAL >> processData.xml.new
 
 rm processData.xml
 mv processData.xml.new processData.xml
+cd - 

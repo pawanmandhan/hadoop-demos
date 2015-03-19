@@ -95,7 +95,6 @@
             <name-node>${nameNode}</name-node>
             <job-xml>${workflow_root_dir}/conf/hive-site.xml</job-xml>            
             <script>${workflow_root_dir}/hql/DML/aggregate.hql</script>
-            <archive>${workflow_root_dir}/jars/hive-hcatalog-core.jar</archive>
 			<param>execution_id=${execution_id}</param>
 			<param>workflow_root_dir=${workflow_root_dir}</param>
 			<param>hive_db=${hive_db}</param>
@@ -105,6 +104,8 @@
 			<param>export_table=${export_table}</param>        
 			<param>xml_archive_table=${xml_archive_table}</param>        
 			<param>json_events_master_table=${json_events_master_table}</param>        
+            <file>${workflow_root_dir}/jars/hive-hcatalog-core.jar</file>
+            <archive>${workflow_root_dir}/jars/hive-hcatalog-core.jar</archive>			
         </hive>
         <ok to="export_min_data"/>
         <error to="end"/>

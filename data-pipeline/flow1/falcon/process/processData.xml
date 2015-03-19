@@ -14,7 +14,7 @@
     
     <parallel>1</parallel>
     <order>FIFO</order>
-    <frequency>minutes(5)</frequency>
+    <frequency>minutes(2)</frequency>
 
 	<inputs>
          <input name="eventData" feed="demoEventData" start="now(0,0)" end="now(0,0)" />

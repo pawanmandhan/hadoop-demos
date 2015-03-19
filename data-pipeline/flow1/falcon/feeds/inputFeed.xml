@@ -7,7 +7,7 @@
     
     <tags>externalSystem=eventData,classification=clinicalResearch</tags>
     <groups>events</groups>
-    <frequency>minutes(5)</frequency>
+    <frequency>minutes(3)</frequency>
     <late-arrival cut-off="hours(4)"/>
     <clusters>
         <cluster name="primaryCluster">

@@ -36,8 +36,7 @@
 
 		<property name="workflow_root_dir" value="/user/ambari-qa/data_pipeline_demo" />
 	
-		<property name="hive_db" value="hivedb" />
-
+		<property name="hive_db" value="demodb" />
 		
 		<property name="xml_raw_table" value="raw_xml" />
 		<property name="json_raw_table" value="raw_json" />
@@ -52,8 +51,8 @@
 		<property name="EXPORT_JDBC_URL" value="jdbc:mysql://localhost:3306/demomysql" />
 		<property name="EXPORT_USER_ID" value="demouser" />
 		<property name="EXPORT_USER_PASSWORD" value="demopwd" />
-		<property name="EXPORT_DATA_SOURCE_DIR" value="/user/ambari-qa/data_pipeline_demo/hivedb/sv_aggregate" />
-		<property name="TARGET_EXPORT_TABLE" value="sv_aggregate" />
+		<property name="EXPORT_DATA_SOURCE_DIR" value="/user/ambari-qa/data_pipeline_demo/hivedb/" />
+		<property name="EXPORT_TARGET_TABLE" value="sv_aggregate" />
 		<property name="EXPORT_DATA_DELIMITER" value="|" />
 														
     </properties>

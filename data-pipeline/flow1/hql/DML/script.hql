@@ -1,5 +1,5 @@
 
---set hive.execution.engine=tez;
+set hive.execution.engine=tez;
 --set hive.exec.dynamic.partition.mode=nonstrict;
 --set hive.exec.dynamic.partition=true;
 --set hive.enforce.bucketing=true;
@@ -40,8 +40,6 @@ select convertJArr2Obj(convertX2J(row)) from raw_xml;
 LOAD DATA INPATH '/user/ambari-qa/data_pipeline_demo/hivedb/raw_json/' INTO TABLE `test2.sv_json_data`;
 
 --********** QUERY NUMBER 3 ************---
-
-set hive.execution.engine=tez;
 
 insert into table sv_aggregate
 select studyid,visit,year(svstdtc),month(svstdtc),count(*) from sv_json_data

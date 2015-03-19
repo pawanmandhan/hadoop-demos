@@ -1,5 +1,6 @@
 USE ${hivevar:hive_db};
 set hive.execution.engine=tez;
+add jar hdfs://${hivevar:workflow_root_dir}/jars/MyXml2JsonUdf.jar;
 
 --********** QUERY NUMBER 1 : Move data from XML table to JSON table ************---
 

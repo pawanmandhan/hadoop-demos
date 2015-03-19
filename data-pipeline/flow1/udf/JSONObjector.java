@@ -36,7 +36,7 @@ public class JSONObjector extends UDF {
       		return new Text(newJSONObj.toString());
 			
         } catch (Exception je) {
-            return new Text("Error while converting JSON Array to JSON Object");
+            return new Text("Error while converting JSON Array to JSON Object. Error is = "+je.getMessage());
             //je.printStackTrace();
         }
     }

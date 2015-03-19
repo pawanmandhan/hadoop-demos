@@ -12,7 +12,10 @@ visit_count BIGINT
 ) ;
 
 
-create user 'demouser' identified by 'demopwd';
+create user 'demouser'@'localhost' identified by 'demopwd';
 
-GRANT ALL PRIVILEGES ON demouser.* TO 'demouser'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON demomysql.* TO 'demouser'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
 

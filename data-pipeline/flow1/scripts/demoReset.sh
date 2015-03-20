@@ -1,5 +1,7 @@
 #!/bin/bash
 
+project_root="/app/hadoop-demos/data-pipeline/flow1"
+
 un=`whoami`
 if [ $un == 'root' ]; then
 
@@ -19,7 +21,7 @@ su - ambari-qa -c "hdfs dfs -rm -r /user/ambari-qa/data_pipeline_demo/hivedb/xml
 
 
 echo "Cleaning up mysql table"
-
+mysql < ${project_root}/sql/truncatetbl.sql
 
 
 else

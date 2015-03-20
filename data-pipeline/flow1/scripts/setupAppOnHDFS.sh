@@ -1,10 +1,10 @@
 #!/bin/bash
 
-su - hdfs -c "ls" 1>/dev/null 2>/dev/null
+set +vx 
 
-suRetCode=$?
-
-if [ $suRetCode == 0 ]; then 
+un=`whoami`
+project_root="/app/hadoop-demos/data-pipeline/flow1"
+if [ $un == 'root' ]; then
 
 #hql File Directories
 echo "Create hql  File  directory - Start"
@@ -12,13 +12,6 @@ su - hdfs -c "hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/hql"
 su - hdfs -c "hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/hql"
 su - hdfs -c "hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/hql"
 echo "Create hql  File  directory - Done"
-
-#pig File Directories 
-echo "Create pig File  directory - Start"
-su - hdfs -c "hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/pig"
-su - hdfs -c "hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/pig"
-su - hdfs -c "hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/pig"
-echo "Create pig File  directory - Done"
  
 #conf File Directories 
 echo "Create conf File  directory - Start"
@@ -62,11 +55,51 @@ su - hdfs -c "hdfs dfs -chown falcon:hadoop /apps/falcon/primaryCluster/working"
 echo "Create Falcon working directory - Done"
 
 #falcon workflow File Directories 
-echo "Create Falcon workflow directory - Start"
+echo "Creating Falcon workflow directory - Start"
 su - hdfs -c "hdfs dfs -mkdir -p /user/ambari-qa/data_pipeline_demo/falcon/workflow"
 su - hdfs -c "hdfs dfs -chmod 777 /user/ambari-qa/data_pipeline_demo/falcon/workflow"
 su - hdfs -c "hdfs dfs -chown ambari-qa:hadoop /user/ambari-qa/data_pipeline_demo/falcon/workflow"
-echo "Create Falcon workflow directory - Done"
+echo "Created Falcon workflow directory - Done"
+
+echo "Creating Hive Tables - Start"
+su - ambari-qa -c "hive -e /app/hadoop-demos/data-pipeline/flow1/hql/DDL/create-tables.hql"
+echo "Creating Hive Tables - Done"
+
+echo "Adding JSON Serde Jar - Start"
+su - ambari-qa -c "hive -e /app/hadoop-demos/data-pipeline/flow1/hql/DDL/add-json-serde.hql"
+echo "Adding JSON Serde Jar - Start"
+
+echo "Creating UDFs - Start"
+su - ambari-qa -c "hive -e /app/hadoop-demos/data-pipeline/flow1/hql/DDL/create-udfs.hql"
+echo "Creating UDFs - Done"
+
+echo "Setting up flume - Start"
+mkdir -p /root/data_pipeline_demo/input
+cp /etc/flume/conf/flume.conf etc/flume/conf/flume.conf.bak
+cp /app/hadoop-demos/data-pipeline/flow1/flume/flume.conf /etc/flume/conf/flume.conf
+echo "Setting up flume - Done"
+
+echo "Setting up MYSQL JDBC driver for Sqoop - Start"
+cp /app/hadoop-demos/data-pipeline/flow1/jars/mysql-connector-java.jar /usr/share/java/
+cd /usr/lib/hadoop/
+ln -s /usr/share/java/mysql-connector-java.jar
+cd -
+cd /usr/hdp/2.2.0.0-2041/sqoop/lib
+ln -s /usr/share/java/mysql-connector-java.jar
+cd - 
+echo "Setting up MYSQL JDBC driver for Sqoop - Done"
+
+echo "Setting up MYSQL Database - Start"
+echo "****Assuming MySQL Database is installed****"
+mysql < /app/hadoop-demos/data-pipeline/flow1/sql/ddl.sql
+echo "Setting up MYSQL Database - Done"
+
+echo "Starting the Flume Agent - Start"
+cd /var/log/flume
+nohup flume-ng agent -c /etc/flume/conf -f /etc/flume/conf/flume.conf -n sandbox & 
+echo ""
+echo ""
+echo "Starting the Flume Agent - Done"
 
 else
 

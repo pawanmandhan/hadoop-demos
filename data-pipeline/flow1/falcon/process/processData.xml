@@ -14,7 +14,7 @@
     
     <parallel>1</parallel>
     <order>FIFO</order>
-    <frequency>minutes(2)</frequency>
+    <frequency>minutes(3)</frequency>
 
 	<inputs>
          <input name="eventData" feed="demoEventData" start="now(0,0)" end="now(0,0)" />
@@ -23,16 +23,8 @@
     <properties>
 		<property name="execution_id" value="${coord:formatTime(coord:nominalTime(), 'yyyyMMdd_HH')}" />
 
-		<!-- TESTING CHANGE START -->
-		<!-- Uncomment the two lines below for testing -->
-		<!--
-		<property name="report_date_value" value="20141130" />
-		<property name="report_date_hour_value" value="23" />		
-		-->
-		<!-- Comment the two lines below for testing -->
 		<property name="report_date_value" value="${coord:formatTime(coord:nominalTime(), 'yyyyMMdd')}" />
 		<property name="report_date_hour_value" value="${coord:formatTime(coord:nominalTime(), 'HH')}" />		
-		<!-- TESTING CHANGE END  -->
 
 		<property name="workflow_root_dir" value="/user/ambari-qa/data_pipeline_demo" />
 	

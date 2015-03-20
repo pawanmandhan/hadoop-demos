@@ -28,7 +28,8 @@ In this flow, there are following processes and steps
 ### Getting Project components
 
 * Project Components used are (relative to this project within the github code) 
-	* ./pig
+
+	* ./jars
 	* ./udf
 	* ./hql
 	* ./falcon
@@ -37,6 +38,12 @@ In this flow, there are following processes and steps
 	
 
 ### Steps to setup up Project components
+
+* Ambari - Make sure that following component are running 
+	- Hive
+	- Falcon
+	- Oozie
+	- Flume
 
 * Ambari Setting
 ```

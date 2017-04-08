@@ -1,0 +1,6 @@
+1 - Add Solr and Banana UI to allow full text searching in the log files.
+2 - Also, add the ability to find a particular session based on user id or session id
+3 - Can we use Kibana for the dashboard?
+4 - Add more log types - sys logs, firewall logs
+5 - Allow the log format to be flexible..
+6 - Enhance log generator to be able to

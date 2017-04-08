@@ -1,0 +1,31 @@
+sandbox.sources = eventlog
+sandbox.channels = memory_channel
+sandbox.sinks = sink_to_hdfs
+
+# Define / Configure source
+sandbox.sources.eventlog.type = spooldir
+sandbox.sources.eventlog.spoolDir = /root/demo-data
+sandbox.sources.eventlog.fileHeader = true
+sandbox.sources.eventlog.deletePolicy = immediate
+
+# HDFS sinks
+sandbox.sinks.sink_to_hdfs.type = hdfs
+sandbox.sinks.sink_to_hdfs.hdfs.fileType = DataStream
+sandbox.sinks.sink_to_hdfs.hdfs.path = /flume/events
+sandbox.sinks.sink_to_hdfs.hdfs.filePrefix = %{filename}
+sandbox.sinks.sink_to_hdfs.hdfs.fileSuffix = 
+sandbox.sinks.sink_to_hdfs.hdfs.rollCount = 0
+sandbox.sinks.sink_to_hdfs.hdfs.rollInterval = 0
+sandbox.sinks.sink_to_hdfs.hdfs.rollSize = 0
+sandbox.sinks.sink_to_hdfs.hdfs.batchSize = 1000
+
+# Use a channel which buffers events in memory
+sandbox.channels.memory_channel.type = memory
+sandbox.channels.memory_channel.capacity = 1000
+sandbox.channels.file_channel.transactionCapacity = 1000
+#sandbox.channels.memory_channel.checkpointDir = /var/flume/checkpoint
+#sandbox.channels.memory_channel.dataDirs = /var/flume/data
+
+# Bind the source and sink to the channel
+sandbox.sources.eventlog.channels = memory_channel
+sandbox.sinks.sink_to_hdfs.channel = memory_channel

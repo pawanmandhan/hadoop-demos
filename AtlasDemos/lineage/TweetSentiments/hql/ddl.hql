@@ -30,6 +30,8 @@ FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE
 location '/user/admin/data/sentiments';
 
+CREATE TABLE words_array AS SELECT tweet_id AS id, split(text,' ') AS words FROM tweets;
+
 CREATE TABLE tweet_word AS SELECT id AS id, word FROM words_array LATERAL VIEW explode(words) w as word;
 
 CREATE TABLE word_join AS SELECT tweet_word.id, tweet_word.word, sentiment_dictionary.rating FROM tweet_word LEFT OUTER JOIN sentiment_dictionary ON (tweet_word.word=sentiment_dictionary.word);

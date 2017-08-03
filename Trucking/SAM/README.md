@@ -7,6 +7,8 @@ https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.1/bk_streaming-analytics-
 
 https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset-maclinux/#step6
 
+https://github.com/georgevetticaden/hdp/tree/master/reference-apps/iot-trucking-app/trucking-data-simulator
+
 
 ## Kafka commands 
 

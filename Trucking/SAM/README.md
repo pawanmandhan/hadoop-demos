@@ -4,6 +4,7 @@
 
 
 https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.0.1/bk_streaming-analytics-manager-user-guide/content/ch_sam-building-an-app.html
+
 https://hortonworks.com/tutorial/real-time-event-processing-in-nifi-sam-schema-registry-and-superset-maclinux/#step6
 
 

@@ -20,6 +20,8 @@ cd /usr/hdf/current/kafka-broker/bin/
 
 ## Running the data loader 
 
+Download the data loader from here - https://drive.google.com/file/d/0BwT83-9bZp3ecjN5d3VWWmRxQlk/view
+
 ```
 nohup java -cp /root/trucking/Data-Loader/stream-simulator-jar-with-dependencies.jar  hortonworks.hdp.refapp.trucking.simulator.SimulationRegistrySerializerRunnerApp 
 20000 
@@ -34,3 +36,4 @@ ALL_STREAMS
 NONSECURE
 &
 ```
+

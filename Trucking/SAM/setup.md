@@ -6,7 +6,7 @@
 
 +1 truck_events_log
 
-* Name = truck_events_log
+* Name = raw-truck_events_log
 * Description = Schema for truck geo events in log files
 * Type = Avro schema provider
 * Schema Group = truck-sensors-log
@@ -37,7 +37,7 @@
 
 +2 truck_speed_events_log
 
-* Name = truck_speed_events_log
+* Name = raw-truck_speed_events_log
 * Description = Schema for truck speed events in log files 
 * Type = Avro schema provider
 * Schema Group = truck-sensors-log

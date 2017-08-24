@@ -64,6 +64,13 @@
 
 ## Kafka Setup 
 
+Following Kafka Topics are needed 
+
+raw-truck_events_avro
+raw-truck_speed_events_avro
+truck_events_avro
+truck_speed_events_avro
+
 ```
 cd /usr/hdf/current/kafka-broker/bin/
 

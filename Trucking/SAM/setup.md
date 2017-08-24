@@ -205,3 +205,20 @@ ALL_STREAMS \
 NONSECURE
 
 ```
+
+
++8 Setup SAM 
+
+* Create a Custom UDF 
+
+PROPERTY	VALUE
+Name	ROUND
+Display Name	ROUND
+Description	Rounds a double to integer
+Type	FUNCTION
+Classname	hortonworks.hdf.sam.custom.udf.math.Round
+UDF JAR	sam-custom-udf-0.0.5.jar
+
+* Import SAM Template
+
+* Modify configs appropriately. 

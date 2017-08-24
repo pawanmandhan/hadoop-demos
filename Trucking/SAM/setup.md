@@ -72,14 +72,14 @@ cd /usr/hdf/current/kafka-broker/bin/
 --zookeeper localhost:2181 \
 --replication-factor 1 \
 --partition 2 \
---topic truck_events_avro
+--topic raw-truck_events_avro
 
 ./kafka-topics.sh \
 --create \
 --zookeeper localhost:2181 \
 --replication-factor 1 \
 --partition 2 \
---topic truck_speed_events_avro
+--topic raw-truck_speed_events_avro
 
 
 ./kafka-topics.sh \

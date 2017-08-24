@@ -139,6 +139,7 @@ https://github.com/georgevetticaden/hdp/tree/master/reference-apps/iot-trucking-
 
 +6 Data-Loader Setup
 
+* Data-Loader.zip - download from  https://drive.google.com/file/d/0BwT83-9bZp3ecjN5d3VWWmRxQlk/view
 * Get DataLoader.zip, put it in /root and unzip it
 ```
 ls -ltra /root/Data-Loader/routes/midwest/

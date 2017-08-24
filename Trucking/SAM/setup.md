@@ -229,3 +229,10 @@ UDF JAR	sam-custom-udf-0.0.5.jar
 * Import SAM Template
 
 * Modify configs appropriately. 
+
+* ON HDP Cluster, fix the permissions 
+```
+hdfs dfs -chmod 777 /apps/
+```
+
+* Start SAM Topology

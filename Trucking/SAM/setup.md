@@ -179,6 +179,19 @@ gunzip routes.tar.gz
 tar xvf routes.tar 
 rm -rf routes.tar
 
+```
+
+
+
++7 Run Data Loader 
+
+```
+
+export PATH=$PATH:/usr/jdk64/jdk1.8.0_112/bin
+export JAVA_HOME=/usr/jdk64/jdk1.8.0_112
+
+chmod -R 775 /root/Data-Loader/*
+
 java -cp /root/Data-Loader/stream-simulator-jar-with-dependencies.jar  hortonworks.hdp.refapp.trucking.simulator.SimulationRegistrySerializerRunnerApp \
 20000  \
 hortonworks.hdp.refapp.trucking.simulator.impl.domain.transport.Truck \
@@ -186,10 +199,9 @@ hortonworks.hdp.refapp.trucking.simulator.impl.collectors.KafkaEventSerializedWi
 1 \
 /root/Data-Loader/routes/midwest/ \
 10000 \
-kafka-node.com:6667 \
+kafka-broker:6667 \
 http://schema-registry-node:7788/api/v1 \
 ALL_STREAMS \
-NONSECURE \
-& 
+NONSECURE
 
 ```
